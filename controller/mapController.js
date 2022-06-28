@@ -15,6 +15,22 @@ const getMap = async (req, res) => {
   }
 };
 
+const getMapById = async (req, res) => {
+  console.log(req.params.id);
+  try {
+    const map = await Map.findById(req.params.id);
+    res.status(200).json({
+      success: true,
+      data: map,
+    });
+  } catch (error) {
+    res.status(404).json({
+      success: false,
+      data: "Object not founds"
+    })
+  }
+};
+
 const deleteMap = async (req, res) => {
   try {
     const map = await Map.findById(req.params.id);
@@ -54,4 +70,4 @@ const postMap = async (req, res) => {
     });
   }
 };
-module.exports = { getMap, postMap, deleteMap };
+module.exports = { getMap, postMap, deleteMap, getMapById };
