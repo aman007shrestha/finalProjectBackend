@@ -16,7 +16,6 @@ const getMap = async (req, res) => {
 };
 
 const getMapById = async (req, res) => {
-  console.log(req.params.id);
   try {
     const map = await Map.findById(req.params.id);
     res.status(200).json({
@@ -26,8 +25,8 @@ const getMapById = async (req, res) => {
   } catch (error) {
     res.status(404).json({
       success: false,
-      data: "Object not founds"
-    })
+      data: 'Object not founds',
+    });
   }
 };
 
@@ -48,10 +47,7 @@ const deleteMap = async (req, res) => {
 
 const postMap = async (req, res) => {
   const { player, mapData } = req.body;
-  console.log(mapData);
   const level = (await Map.find()).length;
-  console.log(level);
-
   const newMap = new Map({
     player,
     map: mapData,

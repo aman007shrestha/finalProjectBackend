@@ -2,7 +2,7 @@ const Score = require('../models/Score');
 
 const getScore = async (req, res) => {
   try {
-    const scores = await Score.find().sort('time');
+    const scores = (await Score.find().sort('-score')).slice(0, 5);
     res.status(200).json({
       success: true,
       data: scores,
