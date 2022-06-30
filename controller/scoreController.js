@@ -1,5 +1,9 @@
 const Score = require('../models/Score');
 
+/**
+ *
+ * @desc get all score and return highest 5
+ */
 const getScore = async (req, res) => {
   try {
     const scores = (await Score.find().sort('-score')).slice(0, 5);
@@ -15,6 +19,10 @@ const getScore = async (req, res) => {
   }
 };
 
+/**
+ *
+ * @desc save score collection
+ */
 const postScore = async (req, res) => {
   const { player, score, time } = req.body;
   const newScore = new Score({

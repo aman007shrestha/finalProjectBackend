@@ -1,5 +1,8 @@
 const Map = require('../models/MapModel');
-
+/**
+ *
+ * @desc gets all the map collections
+ */
 const getMap = async (req, res) => {
   try {
     const maps = await Map.find();
@@ -15,6 +18,10 @@ const getMap = async (req, res) => {
   }
 };
 
+/**
+ *
+ * @desc get a map by id
+ */
 const getMapById = async (req, res) => {
   try {
     const map = await Map.findById(req.params.id);
@@ -30,6 +37,9 @@ const getMapById = async (req, res) => {
   }
 };
 
+/**
+ * @desc delete a map by id
+ */
 const deleteMap = async (req, res) => {
   try {
     const map = await Map.findById(req.params.id);
@@ -45,9 +55,13 @@ const deleteMap = async (req, res) => {
   }
 };
 
+/**
+ *
+ * @desc save a map
+ */
 const postMap = async (req, res) => {
   const { player, mapData } = req.body;
-  const level = (await Map.find()).length;
+  const level = (await Map.find()).length + 1;
   const newMap = new Map({
     player,
     map: mapData,

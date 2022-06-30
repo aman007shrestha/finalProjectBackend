@@ -1,8 +1,12 @@
 const Message = require('../models/MessageModel');
 
+/**
+ *
+ * @desc Get all messages and choose only latest 5
+ */
 const getMessages = async (req, res) => {
   try {
-    const messages = await Message.find();
+    const messages = (await Message.find().sort('-created_on')).slice(0, 5);
     res.status(200).json({
       success: true,
       data: messages,
@@ -15,6 +19,10 @@ const getMessages = async (req, res) => {
   }
 };
 
+/**
+ *
+ * @desc save message
+ */
 const postMessages = async (req, res) => {
   const { player, message } = req.body;
   const newMessage = new Message({
